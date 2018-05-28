@@ -1,6 +1,9 @@
 # React Circular Slider Bar
 
+[demo](https://alexsyo.github.io/react-circular-slider/)
+
 ## Getting started
+
 install
 ```
 npm install --save-dev react-circular-slider-bar
@@ -25,10 +28,8 @@ const myApp = () => (
 export default myApp;
 ```
 
-
-
-
 ## Props
+
 prop             | type   | deafult
 -----------------|--------|--------
 r                | number | 80
