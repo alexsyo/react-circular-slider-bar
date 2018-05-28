@@ -31,5 +31,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alexsyo/react-circular-slider-bar.git"
-  }
+  },
+  "keywords": [
+    "react",
+    "arc",
+    "circular",
+    "round",
+    "slider"
+  ]
 }
