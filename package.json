@@ -1,6 +1,6 @@
 {
   "name": "react-circular-slider-bar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A circular slider component for react",
   "main": "build/index.js",
   "scripts": {
@@ -28,9 +28,8 @@
     "name": "alexsyo",
     "email": "alex_ok@hotmail.it"
   },
-  "repository" :
-  { 
-    "type" : "git",
-    "url" : "https://github.com/alexsyo/react-circular-slider-bar.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexsyo/react-circular-slider-bar.git"
   }
 }
