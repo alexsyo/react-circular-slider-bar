@@ -7,7 +7,8 @@ Enjoy a circular slider bar component for React with no unnecessary dependencies
 Key Features:
 - Simple to use
 - Highly customizable
-- no extra dependencies
+- No extra dependencies
+- Style based: no images / SVGs
 
 Check the [demo](https://alexsyo.github.io/react-circular-slider/)!
 
