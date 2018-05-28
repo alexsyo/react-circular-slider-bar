@@ -1,0 +1,1 @@
+export const getRelativeAngle = (angle, initialAngle) => (360 - angle + initialAngle) % 360

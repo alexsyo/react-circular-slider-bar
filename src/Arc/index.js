@@ -1,4 +1,5 @@
 import React from 'react';
+import { getRelativeAngle } from '../utils';
 
 const getPointCoordString = (r, angle) => {
   const angleRad = angle * (Math.PI / 180)
@@ -6,8 +7,6 @@ const getPointCoordString = (r, angle) => {
   const y = - Math.sin(angleRad) * r * 100;
   return `${x}px ${y}px`;
 }
-
-const getRelativeAngle = (angle, initialAngle) => (360 - angle + initialAngle) % 360
 
 const Arc = ({r, angle, initialAngle, width, color}) => {
   const angleGrad = angle * (180 / Math.PI);

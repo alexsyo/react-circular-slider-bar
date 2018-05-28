@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Arc from './Arc';
 import Track from './Track';
 import Thumb from './Thumb';
+import { getRelativeAngle } from './utils';
 
 class App extends Component {
   static propTypes = {
@@ -74,7 +75,8 @@ class App extends Component {
 
   handleChange = (angle) => {
     const angleDEG = angle * (180 / Math.PI)
-    const percent = (angleDEG / 360) * 100
+
+    const percent = (getRelativeAngle(angleDEG, this.props.initialAngle) / 360) * 100
 
     this.props.onChange(percent);
   }
