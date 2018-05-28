@@ -28,6 +28,7 @@
     "name": "alexsyo",
     "email": "alex_ok@hotmail.it"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/alexsyo/react-circular-slider-bar.git"
