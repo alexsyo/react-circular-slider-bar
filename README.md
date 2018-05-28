@@ -21,6 +21,7 @@ const myApp = () => (
       r={50}
       trackWidth={10}
       thumbWidth={10}
+      onChange={value => console.log(value)}
     />
   </div>
 );
