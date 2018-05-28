@@ -1,0 +1,31 @@
+{
+  "name": "react-circular-slider-bar",
+  "version": "1.0.0",
+  "description": "A circular slider component for react",
+  "main": "build/index.js",
+  "peerDependencies": {
+    "react": "^16.4.0"
+  },
+  "dependencies": {
+    "react": "^16.4.0",
+    "webpack": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "author": {
+    "name": "alexsyo",
+    "email": "alex_ok@hotmail.it"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1"
+  }
+}
