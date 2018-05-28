@@ -7,24 +7,28 @@ import Thumb from './Thumb';
 class App extends Component {
   static propTypes = {
     r: PropTypes.number,
+    initialAngle: PropTypes.number,
     trackWidth: PropTypes.number,
     trackColor: PropTypes.string,
     arcColor: PropTypes.string,
     thumbWidth: PropTypes.number,
     thumbColor: PropTypes.string,
     thumbBorderWidth: PropTypes.number,
-    thumbBorderColor: PropTypes.string
+    thumbBorderColor: PropTypes.string,
+    onChange: PropTypes.func
   }
 
   static defaultProps = {
     r: 80,
+    initialAngle: 90,
     trackWidth: 2,
     trackColor: '#f5f5dc',
     arcColor: '#7985f1',
     thumbWidth: 10,
     thumbColor: 'white',
     thumbBorderWidth: 2,
-    thumbBorderColor: '#cccccc'
+    thumbBorderColor: '#cccccc',
+    onChange: value => {}
   }
 
   constructor(props) {
@@ -42,6 +46,7 @@ class App extends Component {
   moveThumb = evt => {
     const angle = this.calculateAngle(evt.clientX, evt.clientY)
     const thumbPosition = this.calculateThumbPosition(angle)
+    this.handleChange(angle)
     this.setState({angle, thumbPosition})
   }
 
@@ -67,10 +72,17 @@ class App extends Component {
     return {x, y}
   }
 
+  handleChange = (angle) => {
+    const angleDEG = angle * (180 / Math.PI)
+    const percent = (angleDEG / 360) * 100
+
+    this.props.onChange(percent);
+  }
+
   ref = React.createRef();
   state = {
-    angle: 90 / 57.2957795,
-    thumbPosition: this.calculateThumbPosition(90 / 57.2957795)
+    angle: this.props.initialAngle * (Math.PI / 180),
+    thumbPosition: this.calculateThumbPosition(this.props.initialAngle * (Math.PI / 180))
   }
 
   render() {
@@ -90,6 +102,7 @@ class App extends Component {
         <Arc 
           r={this.props.r}
           angle={this.state.angle}
+          initialAngle={this.props.initialAngle}
           width={this.props.trackWidth}
           color={this.props.arcColor}
         />
