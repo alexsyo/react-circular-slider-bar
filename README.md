@@ -2,7 +2,9 @@
 
 ## Getting started
 install
-```npm install --save-dev react-circular-slider-bar```
+```
+npm install --save-dev react-circular-slider-bar
+```
 
 usage example
 ```
