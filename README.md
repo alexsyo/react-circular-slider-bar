@@ -1,5 +1,32 @@
 # React Circular Slider Bar
 
+## Getting started
+install
+```npm install --save-dev react-circular-slider-bar```
+
+usage example
+```
+import React from 'react';
+import CircularSlider from 'react-circular-slider-bar';
+
+const myApp = () => (
+  <div>
+    ...my awesome stuff...
+    <CircularSlider
+      r={50}
+      trackWidth={10}
+      thumbWidth={10}
+    />
+  </div>
+);
+
+export default myApp;
+```
+
+
+
+
+## Props
 prop             | type   | deafult
 -----------------|--------|--------
 r                | number | 80
