@@ -18,7 +18,6 @@ class App extends Component {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-      test
         <CircularSlider
           onChange={value => this.setState({value})}
         />
