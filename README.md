@@ -44,7 +44,7 @@ export default myApp;
 prop             | type   | deafult
 -----------------|--------|--------
 r                | number | 80
-initialAngle     | numver | 90
+initialAngle     | number | 90
 trackWidth       | number | 2
 trackColor       | string | #f5f5dc
 arcColor         | string | #7985f1
