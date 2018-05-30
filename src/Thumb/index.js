@@ -23,6 +23,7 @@ const Thumb = ({ diameter, color, borderWidth, borderColor, position, handleMous
       left: position.x,
       top: position.y
     }}
+    draggable={false}
     onMouseDown={() => handleMouseDown()}
   >
     <ThumbImage 
