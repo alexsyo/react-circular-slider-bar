@@ -55,24 +55,26 @@ class App extends Component {
     this.setState({angle, thumbPosition})
   }
 
-  calculateAngle = (mouseXabs, mouseYabs) => {
-    const mouseX = mouseXabs - this.props.r - this.offsets.left;
-    const mouseY = - mouseYabs + this.props.r + this.offsets.top;
-    const angle = toDeg(Math.atan(mouseY / mouseX)) +
-      (mouseX < 0 ? 180 : 0) +
-      (mouseX >= 0 && mouseY < 0 ? 360 : 0);
+  calculateAngle = (mouseX, mouseY) => {
+    const x = mouseX - this.props.r - this.offsets.left;
+    const y = - mouseY + this.props.r + this.offsets.top;
+    const angle = toDeg(Math.atan(y / x)) +
+      ((x < 0) ? 180 : 0) +
+      ((x >= 0 && y < 0) ? 360 : 0);
 
     return angle;
   }
 
   calculateThumbPosition = (angle) => {
+    const {r, trackWidth} = this.props;
+
     const x = Math.cos(toRad(angle))
-      * (this.props.r + (this.props.trackWidth / 2))
-      + this.props.r + this.props.trackWidth
-      
+      * (r + (trackWidth / 2))
+      + r + trackWidth
+
     const y = - Math.sin(toRad(angle))
-      * (this.props.r + (this.props.trackWidth / 2))
-      + this.props.r + this.props.trackWidth
+      * (r + (trackWidth / 2))
+      + r + trackWidth
       
     return {x, y}
   }
