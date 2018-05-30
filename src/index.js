@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import Arc from './Arc';
 import Track from './Track';
 import Thumb from './Thumb';
-import { getRelativeAngle } from './utils';
+import { 
+  toRad,
+  toDeg,
+  getRelativeAngle
+ } from './utils';
 
 class App extends Component {
   static propTypes = {
@@ -54,19 +58,19 @@ class App extends Component {
   calculateAngle = (mouseXabs, mouseYabs) => {
     const mouseX = mouseXabs - this.props.r - this.offsets.left;
     const mouseY = - mouseYabs + this.props.r + this.offsets.top;
-    const angle = Math.atan(mouseY / mouseX) +
-      (mouseX < 0 ? (180 / 57.2957795) : 0) +
-      (mouseX >= 0 && mouseY < 0 ? (360 / 57.2957795) : 0);
+    const angle = toDeg(Math.atan(mouseY / mouseX)) +
+      (mouseX < 0 ? 180 : 0) +
+      (mouseX >= 0 && mouseY < 0 ? 360 : 0);
 
     return angle;
   }
 
   calculateThumbPosition = (angle) => {
-    const x = Math.cos(angle)
+    const x = Math.cos(toRad(angle))
       * (this.props.r + (this.props.trackWidth / 2))
       + this.props.r + this.props.trackWidth
       
-    const y = - Math.sin(angle)
+    const y = - Math.sin(toRad(angle))
       * (this.props.r + (this.props.trackWidth / 2))
       + this.props.r + this.props.trackWidth
       
@@ -74,17 +78,15 @@ class App extends Component {
   }
 
   handleChange = (angle) => {
-    const angleDEG = angle * (180 / Math.PI)
-
-    const percent = (getRelativeAngle(angleDEG, this.props.initialAngle) / 360) * 100
+    const percent = (getRelativeAngle(angle, this.props.initialAngle) / 360) * 100
 
     this.props.onChange(percent);
   }
 
   ref = React.createRef();
   state = {
-    angle: this.props.initialAngle * (Math.PI / 180),
-    thumbPosition: this.calculateThumbPosition(this.props.initialAngle * (Math.PI / 180))
+    angle: this.props.initialAngle,
+    thumbPosition: this.calculateThumbPosition(this.props.initialAngle)
   }
 
   render() {

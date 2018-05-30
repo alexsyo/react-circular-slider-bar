@@ -1,20 +1,21 @@
 import React from 'react';
-import { getRelativeAngle } from '../utils';
+import {
+  toRad,
+  getRelativeAngle
+ } from '../utils';
 
 const getPointCoordString = (r, angle) => {
-  const angleRad = angle * (Math.PI / 180)
-  const x = Math.cos(angleRad) * r * 100;
-  const y = - Math.sin(angleRad) * r * 100;
+  const x = Math.cos(toRad(angle)) * r * 100;
+  const y = - Math.sin(toRad(angle)) * r * 100;
   return `${x}px ${y}px`;
 }
 
 const Arc = ({r, angle, initialAngle, width, color}) => {
-  const angleGrad = angle * (180 / Math.PI);
-  const relativeAngle = getRelativeAngle(angleGrad, initialAngle) 
+  const relativeAngle = getRelativeAngle(angle, initialAngle) 
 
   const center = `${r + width}px ${r + width}px`;
   const start = getPointCoordString(r, initialAngle);
-  const end = getPointCoordString(r, angleGrad);
+  const end = getPointCoordString(r, angle);
   
   const extra1 = (relativeAngle > 90) ? `, ${getPointCoordString(r, getRelativeAngle(45, initialAngle))}` : '';
   const extra2 = (relativeAngle > 180) ? `, ${getPointCoordString(r, getRelativeAngle(135, initialAngle))}` : '';
