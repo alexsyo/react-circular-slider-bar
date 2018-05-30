@@ -62,7 +62,19 @@ class App extends Component {
       ((x < 0) ? 180 : 0) +
       ((x >= 0 && y < 0) ? 360 : 0);
 
-    return angle;
+    return this.limitAngleVariation(angle, 90);
+  }
+
+  limitAngleVariation = (angle, factor) => {
+    const nextRelativeAngle = getRelativeAngle(angle, this.props.initialAngle);
+    const currentRelativeAngle = getRelativeAngle(this.state.angle, this.props.initialAngle);
+
+    return (
+      (nextRelativeAngle < currentRelativeAngle + factor) &&
+      (nextRelativeAngle > currentRelativeAngle - factor)
+    )
+      ? angle
+      : this.state.angle;
   }
 
   calculateThumbPosition = (angle) => {
