@@ -16,7 +16,7 @@ const ThumbImage = ({ diameter, color, borderWidth, borderColor }) => (
   />
 )
 
-const Thumb = ({ diameter, color, borderWidth, borderColor, position, handleMouseDown }) => (
+const Thumb = ({ diameter, color, borderWidth, borderColor, position, handleSelect }) => (
   <div id="thumb"
     style={{
       position: 'absolute',
@@ -24,7 +24,8 @@ const Thumb = ({ diameter, color, borderWidth, borderColor, position, handleMous
       top: position.y
     }}
     draggable={false}
-    onMouseDown={() => handleMouseDown()}
+    onTouchStart={() => handleSelect()}
+    onMouseDown={() => handleSelect()}
   >
     <ThumbImage 
       diameter={diameter}

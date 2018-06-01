@@ -39,21 +39,34 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    document.addEventListener('mouseup', this.thumbMouseUp);
+    document.addEventListener('touchend', this.thumbLeave);
+    document.addEventListener('mouseup', this.thumbLeave);
   }
 
   componentDidMount = () => {
     this.offsets = this.ref.current.getBoundingClientRect()
   }
 
-  thumbMouseDown = () => document.addEventListener('mousemove', this.moveThumb);
-  thumbMouseUp = () => document.removeEventListener('mousemove', this.moveThumb)
+  thumbSelect = () => {
+    document.addEventListener('touchmove', this.moveThumb)
+    document.addEventListener('mousemove', this.moveThumb)
+  }
+
+  thumbLeave = () => {
+    document.removeEventListener('touchmove', this.moveThumb)
+    document.removeEventListener('mousemove', this.moveThumb)
+  }
 
   moveThumb = evt => {
+    const event = evt.changedTouches 
+      ? evt.changedTouches[0] 
+      : evt;
+    
     const angle = pipe(
-      this.calculateAngle(evt.clientX, evt.clientY),
+      this.calculateAngle(event.clientX, event.clientY),
       this.limitAngleVariation
     )
+
     const thumbPosition = this.calculateThumbPosition(angle)
     this.handleChange(angle)
     this.setState({angle, thumbPosition})
@@ -135,7 +148,7 @@ class App extends Component {
           borderWidth={this.props.thumbBorderWidth}
           borderColor={this.props.thumbBorderColor}
           position={this.state.thumbPosition}
-          handleMouseDown={this.thumbMouseDown}
+          handleSelect={this.thumbSelect}
         />
       </div>
     );
