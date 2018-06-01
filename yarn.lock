@@ -845,8 +845,8 @@ camelcase@^3.0.0:
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
 caniuse-lite@^1.0.30000844:
-  version "1.0.30000846"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000846.tgz#2092911eecad71a89dae1faa62bcc202fde7f959"
+  version "1.0.30000847"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000847.tgz#be77f439be29bbc57ae08004b1e470b653b1ec1d"
 
 center-align@^0.1.1:
   version "0.1.3"

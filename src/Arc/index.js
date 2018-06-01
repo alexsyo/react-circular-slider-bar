@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  pipe,
   toRad,
   getRelativeAngle
  } from '../utils';
@@ -17,9 +18,19 @@ const Arc = ({r, angle, initialAngle, width, color}) => {
   const start = getPointCoordString(r, initialAngle);
   const end = getPointCoordString(r, angle);
   
-  const extra1 = (relativeAngle > 90) ? `, ${getPointCoordString(r, getRelativeAngle(45, initialAngle))}` : '';
-  const extra2 = (relativeAngle > 180) ? `, ${getPointCoordString(r, getRelativeAngle(135, initialAngle))}` : '';
-  const extra3 = (relativeAngle > 270) ? `, ${getPointCoordString(r, getRelativeAngle(225, initialAngle))}` : '';
+  const extraPoint1 = pipe(
+    getRelativeAngle(45, initialAngle), 
+    a => getPointCoordString(r, a));
+  const extraPoint2 = pipe(
+    getRelativeAngle(135, initialAngle),
+    a => getPointCoordString(r, a));
+  const extraPoint3 = pipe(
+    getRelativeAngle(225, initialAngle),
+    a => getPointCoordString(r, a));
+  
+  const extra1 = (relativeAngle > 90) ? `, ${extraPoint1}` : '';
+  const extra2 = (relativeAngle > 180) ? `, ${extraPoint2}` : '';
+  const extra3 = (relativeAngle > 270) ? `, ${extraPoint3}` : '';
 
   const polygonString = `polygon(${center}, ${start}${extra1}${extra2}${extra3}, ${end})`;
   return (

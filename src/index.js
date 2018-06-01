@@ -4,6 +4,7 @@ import Arc from './Arc';
 import Track from './Track';
 import Thumb from './Thumb';
 import { 
+  pipe,
   toRad,
   toDeg,
   getRelativeAngle
@@ -49,7 +50,10 @@ class App extends Component {
   thumbMouseUp = () => document.removeEventListener('mousemove', this.moveThumb)
 
   moveThumb = evt => {
-    const angle = this.calculateAngle(evt.clientX, evt.clientY)
+    const angle = pipe(
+      this.calculateAngle(evt.clientX, evt.clientY),
+      this.limitAngleVariation
+    )
     const thumbPosition = this.calculateThumbPosition(angle)
     this.handleChange(angle)
     this.setState({angle, thumbPosition})
@@ -62,16 +66,16 @@ class App extends Component {
       ((x < 0) ? 180 : 0) +
       ((x >= 0 && y < 0) ? 360 : 0);
 
-    return this.limitAngleVariation(angle, 90);
+    return angle;
   }
 
-  limitAngleVariation = (angle, factor) => {
+  limitAngleVariation = (angle) => {
     const nextRelativeAngle = getRelativeAngle(angle, this.props.initialAngle);
     const currentRelativeAngle = getRelativeAngle(this.state.angle, this.props.initialAngle);
 
     return (
-      (nextRelativeAngle < currentRelativeAngle + factor) &&
-      (nextRelativeAngle > currentRelativeAngle - factor)
+      (nextRelativeAngle < currentRelativeAngle + this.limitAngleFactor) &&
+      (nextRelativeAngle > currentRelativeAngle - this.limitAngleFactor)
     )
       ? angle
       : this.state.angle;
@@ -97,6 +101,7 @@ class App extends Component {
     this.props.onChange(percent);
   }
 
+  limitAngleFactor = 90;
   ref = React.createRef();
   state = {
     angle: this.props.initialAngle,
