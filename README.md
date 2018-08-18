@@ -12,14 +12,16 @@ Key Features:
 
 Check the [demo](https://alexsyo.github.io/react-circular-slider-bar/build)!
 
+---
+
 ## Getting started
 
-install
+#### install
 ```
 npm install --save-dev react-circular-slider-bar
 ```
 
-usage example
+#### usage example
 ```
 import React from 'react';
 import CircularSlider from 'react-circular-slider-bar';
@@ -39,12 +41,24 @@ const myApp = () => (
 export default myApp;
 ```
 
+#### controlled component
+
+```
+<CircularSlider
+  value={this.state.value}
+  onChange={value => this.setState({ value })}
+/>
+```
+
+---
+
 ## Props
 
 prop             | type   | deafult
 -----------------|--------|--------
 r                | number | 80
 initialAngle     | number | 90
+value            | number | undefined
 trackWidth       | number | 2
 trackColor       | string | #f5f5dc
 arcColor         | string | #7985f1

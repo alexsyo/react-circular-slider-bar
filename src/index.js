@@ -14,6 +14,7 @@ class App extends Component {
   static propTypes = {
     r: PropTypes.number,
     initialAngle: PropTypes.number,
+    value: PropTypes.number,
     trackWidth: PropTypes.number,
     trackColor: PropTypes.string,
     arcColor: PropTypes.string,
@@ -27,6 +28,7 @@ class App extends Component {
   static defaultProps = {
     r: 80,
     initialAngle: 90,
+    value: undefined,
     trackWidth: 2,
     trackColor: '#f5f5dc',
     arcColor: '#7985f1',
@@ -46,6 +48,10 @@ class App extends Component {
   componentDidMount = () => {
     this.offsets = this.ref.current.getBoundingClientRect()
   }
+
+  angle = () => getRelativeAngle((this.props.value / 100) * 360, this.props.initialAngle) 
+    || this.state.angle 
+    || this.props.initialAngle
 
   thumbSelect = () => {
     document.addEventListener('touchmove', this.moveThumb)
@@ -67,9 +73,8 @@ class App extends Component {
       this.limitAngleVariation
     )
 
-    const thumbPosition = this.calculateThumbPosition(angle)
+    if(!this.props.value) this.setState({angle})
     this.handleChange(angle)
-    this.setState({angle, thumbPosition})
   }
 
   calculateAngle = (mouseX, mouseY) => {
@@ -84,14 +89,14 @@ class App extends Component {
 
   limitAngleVariation = (angle) => {
     const nextRelativeAngle = getRelativeAngle(angle, this.props.initialAngle);
-    const currentRelativeAngle = getRelativeAngle(this.state.angle, this.props.initialAngle);
+    const currentRelativeAngle = getRelativeAngle(this.angle(), this.props.initialAngle);
 
     return (
       (nextRelativeAngle < currentRelativeAngle + this.limitAngleFactor) &&
       (nextRelativeAngle > currentRelativeAngle - this.limitAngleFactor)
     )
       ? angle
-      : this.state.angle;
+      : this.angle();
   }
 
   calculateThumbPosition = (angle) => {
@@ -117,8 +122,7 @@ class App extends Component {
   limitAngleFactor = 90;
   ref = React.createRef();
   state = {
-    angle: this.props.initialAngle,
-    thumbPosition: this.calculateThumbPosition(this.props.initialAngle)
+    angle: undefined
   }
 
   render() {
@@ -137,7 +141,7 @@ class App extends Component {
         />
         <Arc 
           r={this.props.r}
-          angle={this.state.angle}
+          angle={this.angle()}
           initialAngle={this.props.initialAngle}
           width={this.props.trackWidth}
           color={this.props.arcColor}
@@ -147,7 +151,7 @@ class App extends Component {
           color={this.props.thumbColor}
           borderWidth={this.props.thumbBorderWidth}
           borderColor={this.props.thumbBorderColor}
-          position={this.state.thumbPosition}
+          position={this.calculateThumbPosition(this.angle())}
           handleSelect={this.thumbSelect}
         />
       </div>
